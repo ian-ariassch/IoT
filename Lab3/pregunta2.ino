@@ -16,7 +16,7 @@ unsigned int totalMilliLitres;
 const char *ssid = "SENNA"; // Enter your WiFi name
 const char *password = "55555555"; // Enter WiFi password
 const char *mqtt_broker = "192.168.1.20"; // IP del Broker
-const char *topic = "water/militotal"; //El topic al cual el arduino se suscribe. En el caso de este laboratorio podría ser el topic humedad.
+const char *topic = "water/militotal"; 
 const int mqtt_port = 1883;
 
 WiFiClient espClient;
