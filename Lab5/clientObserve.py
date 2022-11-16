@@ -8,7 +8,7 @@ from aiocoap import *
 logging.basicConfig(level=logging.INFO) 
 
 def observe_callback(response): 
-    if response.code.is_successful():
+    if response.code.is_successful(): #si es que el observable recibe un evento, se imprime el payload.
         print("Alarm status: %s" % (response.payload.decode('ascii')))
     else:
         print('Error code %s' % response.code)
