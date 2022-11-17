@@ -14,8 +14,8 @@ float flowRate;
 unsigned long flowMilliLitres;
 unsigned int totalMilliLitres;
 
-const char *ssid = "XXXXXX"; // Enter your WiFi name
-const char *password = "XXXXXX"; // Enter WiFi password
+const char *ssid = "SENNA"; // Enter your WiFi name
+const char *password = "55555555"; // Enter WiFi password
 
 
 WiFiClient espClient;
@@ -34,19 +34,9 @@ void connectToWifi()
   Serial.println("Connected to the WiFi network");
 }
 
-void callback_response(CoapPacket &packet, IPAddress ip, int port);
-
-void callback_response(CoapPacket &packet, IPAddress ip, int port) {
-    char p[packet.payloadlen + 1];
-    memcpy(p, packet.payload, packet.payloadlen);
-    p[packet.payloadlen] = NULL;
-
-
- if(packet.type==3 && packet.code==0){
-      Serial.println("ping ok");
-    }
-
-    Serial.println(p);
+void callback_response(CoapPacket &packet, IPAddress ip, int port) //Definición de función que se ejecutará cuando el servidor responda.
+{
+  Serial.println("Server responded"); //No es necesario que realice una operación específica, ya que la librería se encarga de procesar la respuesta.
 }
  
 void IRAM_ATTR pulseCounter()
@@ -108,8 +98,12 @@ void loop()
      char charBuf[50];
      message.toCharArray(charBuf,50);
 
-    int responseCode = coap.put(IPAddress(192,168,1,20), 5683, "water", charBuf);
-    Serial.print(responseCode);
+    int messageId = coap.put(IPAddress(192,168,1,20), 5683, "water", charBuf);  //Envío del mensaje al servidor a través del método PUT.
+                                                                                   //El primer parámetro es la IP del servidor.
+                                                                                    //El segundo parámetro es el puerto en donde se encuentra el servidor.
+                                                                                    //El tercer parámetro es el recurso al que se quiere actualizar.
+                                                                                    //El cuarto parámetro es el mensaje a enviar, en este caso, el volumen de agua.
+    Serial.print(messageId); //La operación anterior retorna un ID de mensaje, el cuál se imprime en el monitor serial.
     coap.loop();
  
   }
