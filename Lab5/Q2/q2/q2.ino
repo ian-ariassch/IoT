@@ -14,8 +14,8 @@ float flowRate;
 unsigned long flowMilliLitres;
 unsigned int totalMilliLitres;
 
-const char *ssid = "SENNA"; // Enter your WiFi name
-const char *password = "55555555"; // Enter WiFi password
+const char *ssid = "XXXXXX"; // Enter your WiFi name
+const char *password = "XXXXXXX"; // Enter WiFi password
 
 
 WiFiClient espClient;
